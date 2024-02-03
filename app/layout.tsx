@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
+import Navigation from "./navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,14 +19,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className='flex flex-row h-dvh overflow-x-hidden overflow-y-hidden bg-black'>
-          <div className='w-48 flex-shrink-0 overflow-auto border-r border-slate-50/[0.06] p-3 bg-zinc-900'>
-            <div className='flex flex-col'>
-              <Link href={'/'} >HOME</Link>
-              <Link href={'/blog'} >BLOG</Link>
-            </div>
-          </div>
+          <Navigation />
           <div className='flex flex-col flex-auto overflow-auto'>
-            <main className="min-h-screen bg-slate-700 overflow-auto">
+            <main className="min-h-screen bg-slate-700">
               {children}
             </main>
           </div>
