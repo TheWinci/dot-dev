@@ -1,5 +1,7 @@
+
 import { Metadata } from 'next';
 import React from 'react'
+import Content from './content';
 
 export const metadata: Metadata = {
   title: "winci.dev",
@@ -8,13 +10,7 @@ export const metadata: Metadata = {
 
 function Page() {
   return (
-    <div className='bg-gray-950 overflow-hidden min-w-full min-h-full flex justify-center items-center'>
-      <div className={`absolute p-56 rounded-full motion-safe:animate-spin-slow hover:[animation-play-state:paused] filter blur-xl from-blue-600 to-indigo-900 bg-gradient-eclips2`}/>
-      <div className='absolute p-52 rounded-full bg-gray-950'/>
-      <div className='motion-safe:animate-bounce hover:[animation-play-state:paused] text-4xl font-bold bg-gradient-to-r from-indigo-600 via-purple-500 to-indigo-600 inline-block text-transparent bg-clip-text'>
-        WINCI.DEV
-      </div>
-    </div>
+    <Content />
   )
 }
 
