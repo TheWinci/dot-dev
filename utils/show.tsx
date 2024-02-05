@@ -1,6 +1,6 @@
 import React, { Fragment, PropsWithChildren } from 'react'
 
-function Show({ if: show, children }: PropsWithChildren<{ if: boolean }>) {
+function Show({ if: show, children, ...props }: PropsWithChildren<{ if: boolean } & React.HTMLAttributes<HTMLDivElement>>) {
   if (!Boolean(show)) {
     return null;
   }
