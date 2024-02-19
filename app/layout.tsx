@@ -1,31 +1,26 @@
-'use client'
-import React, { PropsWithChildren } from 'react'
-import { Inter } from 'next/font/google';
-import './globals.css'
-import { SpeedInsights } from "@vercel/speed-insights/next"
-import { Analytics } from '@vercel/analytics/react';
-import {
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
+import React, { PropsWithChildren } from "react";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
+import Providers from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
-const queryClient = new QueryClient()
 
 function Layout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <QueryClientProvider client={queryClient}>
-          <div className='flex flex-row h-dvh overflow-x-hidden overflow-y-hidden bg-black'>
+        <Providers>
+          <div className="flex h-dvh flex-row overflow-x-hidden overflow-y-hidden bg-black">
             {children}
             <SpeedInsights />
             <Analytics />
           </div>
-        </QueryClientProvider>
+        </Providers>
       </body>
     </html>
-  )
+  );
 }
 
-export default Layout
+export default Layout;
