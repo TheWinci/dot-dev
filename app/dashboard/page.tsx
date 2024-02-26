@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Home() {
+function Page() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-between p-24 bg-slate-700">
       HOME CONTENT
@@ -8,4 +8,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Page;

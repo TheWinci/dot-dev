@@ -1,12 +1,15 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { getSession, updateSession } from './libs/auth';
 
-export function middleware(request: NextRequest) {
-  const currentUser = request.cookies.get('currentUser')?.value
-
-  if (!currentUser && request.nextUrl.pathname !== '/') {
-    return NextResponse.redirect(new URL('/', request.url))
+export async function middleware(request: NextRequest) {
+  const session = await getSession()
+  
+  if (!session && request.nextUrl.pathname !== '/auth') {
+    return NextResponse.redirect(new URL('/auth', request.url))
   }
+
+  await updateSession(request)
 }
 
 export const config = {
