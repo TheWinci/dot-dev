@@ -9,7 +9,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/auth', request.url))
   }
 
-  await updateSession(request)
+  return await updateSession(request)
 }
 
 export const config = {
