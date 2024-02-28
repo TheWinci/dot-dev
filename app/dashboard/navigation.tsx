@@ -8,8 +8,8 @@ function Navigation() {
   const handleCollapsClicked = () => setIsExpanded(false)
 
   return (
-    <div className={`${isExpanded ? 'w-48' : 'w-24'} flex-shrink-0 overflow-auto border-r border-slate-50/[0.06] p-3 bg-zinc-900`}>
-      <nav className='flex flex-col bg-slate-400 h-full'>
+    <div className={`${isExpanded ? 'w-48' : 'w-24'} h-full flex-shrink-0 overflow-auto p-3 bg-neutral-950 transition-all duration-300 ease-linear`}>
+      <nav className='flex flex-col h-full'>
         <Link href={'/'} >HOME</Link>
         <Link href={'/blog'} >BLOG</Link>
         <div className="mt-auto" onClick={isExpanded ? handleCollapsClicked : handleExpandClicked}>

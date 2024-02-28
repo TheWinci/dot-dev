@@ -16,18 +16,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'regal-blue': '#243c5a',
+        "regal-blue": "#243c5a",
       },
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "gradient-eclips": `radial-gradient(ellipse at top, var(--tw-gradient-from), transparent),
-          radial-gradient(ellipse at bottom, var(--tw-gradient-to), transparent);`,
-        "gradient-eclips2": `radial-gradient(ellipse at top, var(--tw-gradient-from), transparent),
-          radial-gradient(ellipse at bottom, var(--tw-gradient-from), transparent),
-          radial-gradient(ellipse at right, var(--tw-gradient-to), transparent),
-          radial-gradient(ellipse at left, var(--tw-gradient-to), transparent);`,
+        grid: `radial-gradient(transparent 50%,var(--neutral-950) 95%),
+          repeating-linear-gradient(90deg,var(--neutral-800) 0 1px,transparent 1px 32px),
+          repeating-linear-gradient(180deg,var(--neutral-800) 0 1px,transparent 1px 32px);`,
       },
       animation: {
         "spin-slow": "spin 3s linear infinite",
