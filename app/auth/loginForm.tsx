@@ -11,7 +11,7 @@ async function LoginForm({ children }: PropsWithChildren) {
         "use server";
         await login(formData);
 
-        redirect("/dashboard");
+        redirect("/app");
       }}
     >
       {children}
