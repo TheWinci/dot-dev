@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import Link from "next/link";
 import { Fragment, PropsWithChildren } from "react";
 import Navigation from "./navigation";
 
@@ -10,13 +9,13 @@ export const metadata: Metadata = {
 
 export default function Layout({ children }: PropsWithChildren) {
   return (
-    <Fragment>
+    <div className="bg-grid h-full w-full">
       <div className="relative flex h-full w-full">
         <Navigation />
-        <div className="bg-grid flex w-full items-center justify-center overflow-hidden">
+        <div className="flex w-full overflow-hidden">
           {children}
         </div>
       </div>
-    </Fragment>
+    </div>
   );
 }
