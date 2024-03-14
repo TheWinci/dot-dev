@@ -26,7 +26,7 @@ const defaultProps: RecipeProps = {
   ],
 };
 
-function Recipe({ title = defaultProps.title, ingredients = defaultProps.ingredients, instructions = defaultProps.instructions }: RecipeProps) {
+function Recipe({ title, ingredients, instructions }: RecipeProps) {
   return (
     <div className="m-2">
       <h2>{title}</h2>
@@ -46,4 +46,12 @@ function Recipe({ title = defaultProps.title, ingredients = defaultProps.ingredi
   );
 }
 
-export default Recipe;
+function Page() {
+  return (
+    <div className="h-full w-full p-2">
+      <Recipe {...defaultProps} />
+    </div>
+  );
+}
+
+export default Page;
