@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 interface RecipeProps {
@@ -28,27 +29,44 @@ const defaultProps: RecipeProps = {
 
 function Recipe({ title, ingredients, instructions }: RecipeProps) {
   return (
-    <div className="m-2">
-      <h2>{title}</h2>
-      <h3>Ingredients:</h3>
-      <ul>
-        {ingredients.map((ingredient, index) => (
-          <li key={index}>{ingredient}</li>
-        ))}
-      </ul>
-      <h3>Instructions:</h3>
-      <ol>
-        {instructions.map((instruction, index) => (
-          <li key={index}>{instruction}</li>
-        ))}
-      </ol>
+    <div className="flex h-full flex-col">
+      <div className="min-h-full overflow-scroll">
+        <div className="flex flex-row items-center">
+          <div className="flex grow flex-col bg-slate-600/50 h-[400px]">
+            <span className="grow bg-gradient-to-b from-neutral-200 to-neutral-500 bg-clip-text py-8 text-center text-5xl font-bold text-transparent">
+              {title}
+            </span>
+            <div className="bg-blue-600/50 grow h-full">
+              INGRIDIENTS
+            </div>
+          </div>
+          <div className="max-w-[50%]">
+            <Image
+              alt="title image"
+              width={600}
+              height={400}
+              className="object-contain"
+              src={
+                "https://static.fajnegotowanie.pl/media/uploads/media_image/original/przepis/528/sernik-z-brzoskwiniami.jpg"
+              }
+            />
+          </div>
+        </div>
+
+        <div className="flex max-h-full grow flex-row overflow-hidden bg-blue-600/50">
+          <div className="w-[25%] bg-red-600/50">STEPS</div>
+          <div className="grow overflow-auto bg-green-600/50">
+            <div className="min-h-screen h-[2000px]">STEP INSTRUCTION</div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
 
 function Page() {
   return (
-    <div className="h-full w-full p-2">
+    <div className="h-full w-full pl-4">
       <Recipe {...defaultProps} />
     </div>
   );
