@@ -161,7 +161,7 @@ export const Navigation = () => {
         <Button
           variant={"ghost"}
           size={"icon"}
-          className="hover:bg-slate-800"
+          className="hover:bg-slate-800 absolute z-50 right-4 top-4"
           onClick={handleExitPreviewClicked}
         >
           <Minimize />

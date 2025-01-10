@@ -1,5 +1,5 @@
 import React, { useMemo, useState, ComponentProps } from "react";
-import * as UI from "@/components/editor-ui";
+import * as UI from "@/components/sections";
 import { Search } from "lucide-react";
 import {
   SidebarGroup,
@@ -39,19 +39,6 @@ export const ComponentsList = () => {
     setSearchPhrase(e.target.value);
   };
 
-  const getComponentSlots = (componentName: keyof typeof UI) => {
-    const component = UI[componentName];
-    type TComponentProps = ComponentProps<typeof component>;
-    let componentProps: TComponentProps = {};
-    if ('slots' in componentProps) {
-      console.log('has slots')
-    }
-
-    // console.log('componentProps', componentName, componentProps);
-
-    return null;
-  }
-
   return (
     <div className="pt-2">
       <div className="py-4">
@@ -73,6 +60,11 @@ export const ComponentsList = () => {
         </form>
       </div>
       {keys.map((key) => {
+        const Component = UI[key];
+        const slots = Component?.slots;
+
+        console.log(key, 'slots', slots)
+
         return (
           <div
             draggable
@@ -82,8 +74,10 @@ export const ComponentsList = () => {
             key={key}
             className="flex items-center gap-2 rounded-md p-2 hover:bg-gray-800"
           >
-            <span>{key}</span>
-            <span>{getComponentSlots(key)}</span>
+            <p>{key}</p>
+            <p className="text-xs text-gray-400">
+              {slots?.length || 0} slots
+            </p>
           </div>
         );
       })}

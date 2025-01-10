@@ -2,15 +2,15 @@
 import React from "react";
 import { getQueryClient } from "@/providers/get-query-client";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
-import { Navigation } from "./_components/navigation";
-import { Sidebar } from "./_components/sidebar";
-import { Editor } from "./_components/editor";
+import { Navigation } from "../../components/editor-ui/navigation";
+import { Sidebar } from "../../components/editor-ui/sidebar";
+import { Editor } from "../../components/editor-ui/editor";
 
 const Page = () => {
   const queryClient = getQueryClient();
 
   return (
-    <div className="h-full w-full border-16 border-green-500 ">
+    <div className="flex h-full w-full flex-col">
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Navigation />
         <Sidebar />

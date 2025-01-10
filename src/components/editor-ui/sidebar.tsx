@@ -10,9 +10,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { usePreview } from "@/hooks/use-preview";
 import { Plus, SquareStackIcon } from "lucide-react";
 import React from "react";
+import { cn } from "@/lib/utils";
 import { ComponentsList } from "./components-list";
 import { LayerView } from "./layer-view";
-import { cn } from "@/lib/utils";
 
 export const Sidebar = () => {
   const [isPreviewMode] = usePreview();

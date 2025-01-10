@@ -1,6 +1,6 @@
 import { useEditorDevice } from "@/hooks/use-editor-device";
 import { usePreview } from "@/hooks/use-preview";
-import { Container } from "@/components/editor-ui/container";
+import { RootContainer } from "@/components/editor-ui/root-container";
 import React from "react";
 import { cn } from "@/lib/utils";
 
@@ -10,7 +10,7 @@ export const Editor = () => {
 
   return (
     <div
-      className={cn("flex h-full flex-col items-center overflow-scroll", {
+      className={cn("flex flex-1 flex-col items-center overflow-scroll", {
         "mr-[385px]": !isPreviewMode,
       })}
     >
@@ -18,15 +18,9 @@ export const Editor = () => {
         className={cn("h-full w-full overflow-scroll", {
           "w-[850px]": device === "Tablet",
           "w-[420px]": device === "Smartphone",
-          "border border-dashed border-red-600 p-4": !isPreviewMode,
         })}
       >
-        <Container
-          isRoot
-          slots={{
-            content: [<div key={1} className="w-full bg-slate-600">CONTENT SLOT</div>],
-          }}
-        />
+        <RootContainer />
       </div>
     </div>
   );
