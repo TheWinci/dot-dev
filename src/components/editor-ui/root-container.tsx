@@ -25,9 +25,9 @@ function RootContainer() {
   return (
     <div
       className={cn("h-full w-full", {
-        "rounded border border-dashed border-slate-600 p-2": !isPreviewMode,
-        "rounded border border-dashed border-green-600 p-2":
-          !isPreviewMode && editor.selectedElement === editor.root.id,
+        "rounded border border-dashed border-orange-600 p-2": !isPreviewMode,
+        "rounded border-2 border-dashed border-blue-600 p-2":
+          !isPreviewMode && editor.selectedSection === editor.root.id,
       })}
       onDrop={handleOnDrop}
       onDragOver={handleDragOver}

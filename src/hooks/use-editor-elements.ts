@@ -1,17 +1,16 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { text } from "stream/consumers";
+import { useMutation, UseMutationResult, useQuery, useQueryClient } from "@tanstack/react-query";
 import { v4 as uuid } from "uuid";
 
-export const editorElementsQuery = "editor-elements" as const;
+export const editorSectionsQuery = "editor-sections" as const;
 
-export type EditorElement = {
+export type EditorSection = {
   id: string;
   name: string;
   props?: {
     [key: string]: any; // Prop name, Prop value
   };
   slots?: {
-    [key: string]: string[]; // Slot name, Element ID array
+    [key: string | number]: string[]; // Slot name, Element ID array
   };
 };
 
@@ -20,8 +19,8 @@ export type Editor = {
     id: string;
     content: string[];
   };
-  elements: EditorElement[];
-  selectedElement?: string;
+  sections: Map<string, EditorSection>;
+  selectedSection?: string;
 };
 
 const rootUuid = uuid();
@@ -39,82 +38,113 @@ const initialData: Editor = {
     id: rootUuid,
     content: [textOneUuid, columnsTwoUuid],
   },
-  elements: [
-    {
-      id: textOneUuid,
-      name: "Text",
-      props: {
-        text: "Hello, World!",
+  selectedSection: rootUuid,
+  sections: new Map([
+    [
+      textOneUuid,
+      {
+        id: textOneUuid,
+        name: "Text",
+        props: {
+          text: "Hello, World!",
+        },
+        slots: {},
       },
-      slots: {},
-    },
-    {
-      id: textTwoUuid,
-      name: "Text",
-      props: {
-        text: "Middle, World!",
+    ],
+    [
+      textTwoUuid,
+      {
+        id: textTwoUuid,
+        name: "Text",
+        props: {
+          text: "Middle, World!",
+        },
+        slots: {},
       },
-      slots: {},
-    },
-    {
-      id: textThreeUuid,
-      name: "Text",
-      props: {
-        text: "Goodbye, World!",
+    ],
+    [
+      textThreeUuid,
+      {
+        id: textThreeUuid,
+        name: "Text",
+        props: {
+          text: "Goodbye, World!",
+        },
+        slots: {},
       },
-      slots: {},
-    },
-    {
-      id: textOrder1,
-      name: "Text",
-      props: {
-        text: "text 1",
+    ],
+    [
+      textOrder1,
+      {
+        id: textOrder1,
+        name: "Text",
+        props: {
+          text: "text 1",
+        },
+        slots: {},
       },
-      slots: {},
-    },
-    {
-      id: textOrder2,
-      name: "Text",
-      props: {
-        text: "text 2",
+    ],
+    [
+      textOrder2,
+      {
+        id: textOrder2,
+        name: "Text",
+        props: {
+          text: "text 2",
+        },
+        slots: {},
       },
-      slots: {},
-    },
-    {
-      id: textOrder3,
-      name: "Text",
-      props: {
-        text: "text 3",
+    ],
+    [
+      textOrder3,
+      {
+        id: textOrder3,
+        name: "Text",
+        props: {
+          text: "text 3",
+        },
+        slots: {},
       },
-      slots: {},
-    },
-    {
-      id: textOrder4,
-      name: "Text",
-      props: {
-        text: "text 4",
+    ],
+    [
+      textOrder4,
+      {
+        id: textOrder4,
+        name: "Text",
+        props: {
+          text: "text 4",
+        },
+        slots: {},
       },
-      slots: {},
-    },
-    {
-      id: columnsTwoUuid,
-      name: "Columns",
-      props: {
-        numberOfColumns: 2,
+    ],
+    [
+      columnsTwoUuid,
+      {
+        id: columnsTwoUuid,
+        name: "Columns",
+        props: {
+          numberOfColumns: 2,
+        },
+        slots: {
+          [0 as number]: [
+            textTwoUuid,
+            textOrder1,
+            textOrder2,
+            textOrder3,
+            textOrder4,
+          ],
+          [1 as number]: [textThreeUuid],
+        },
       },
-      slots: {
-        0: [textTwoUuid, textOrder1, textOrder2, textOrder3, textOrder4],
-        1: [textThreeUuid],
-      },
-    },
-  ],
-  selectedElement: rootUuid,
+    ],
+  ]),
 };
 
 type TUseEditorElementsQuery = {
-  editor: Editor,
-  addToRoot: (elementToAdd: EditorElement) => void,
-  setRootOrder: (newOrder: string[]) => void
+  editor: Editor;
+  addToRoot: (elementToAdd: EditorSection) => void;
+  setRootOrder: (newOrder: string[]) => void;
+  setSectionData: UseMutationResult<EditorSection | undefined, Error, EditorSection, unknown>;
 };
 
 export function useEditorElements(): TUseEditorElementsQuery {
@@ -122,7 +152,7 @@ export function useEditorElements(): TUseEditorElementsQuery {
 
   const { data } = useQuery(
     {
-      queryKey: [editorElementsQuery],
+      queryKey: [editorSectionsQuery],
       queryFn: async () => {
         return initialData;
       },
@@ -131,27 +161,55 @@ export function useEditorElements(): TUseEditorElementsQuery {
     queryClient,
   );
 
-  const addToRoot = (elementToAdd: EditorElement) => {
-    queryClient.setQueryData([editorElementsQuery], {
+  const addToRoot = (sectionToAdd: EditorSection) => {
+    queryClient.setQueryData([editorSectionsQuery], {
+      ...data,
       root: {
-        content: [...data.root.content, elementToAdd.id],
+        content: [...data.root.content, sectionToAdd.id],
       },
-      elements: [...data.elements, elementToAdd],
+      sections: [...data.sections, sectionToAdd],
     });
+    queryClient.invalidateQueries({ queryKey: [editorSectionsQuery] });
   };
 
   const setRootOrder = (newOrder: string[]) => {
-    queryClient.setQueryData([editorElementsQuery], {
+    queryClient.setQueryData([editorSectionsQuery], {
+      ...data,
       root: {
         content: newOrder,
       },
-      elements: data.elements,
     });
+    queryClient.invalidateQueries({ queryKey: [editorSectionsQuery] });
   };
+
+  const setSectionData = useMutation({
+    mutationKey: [editorSectionsQuery],
+    mutationFn: async (newSectionData: EditorSection) => {
+      const previousData = queryClient.getQueryData<Editor>([
+        editorSectionsQuery,
+      ]);
+      if (!previousData) {
+        return;
+      }
+      const newSections = previousData.sections.set(
+        newSectionData.id,
+        newSectionData,
+      );
+      queryClient.setQueryData([editorSectionsQuery], {
+        ...previousData,
+        sections: newSections,
+      });
+      return newSectionData;
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: [editorSectionsQuery] });
+    },
+  });
 
   return {
     editor: data,
     addToRoot,
-    setRootOrder
+    setRootOrder,
+    setSectionData,
   };
 }

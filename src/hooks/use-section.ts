@@ -1,17 +1,16 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { EditorElement, useEditorElements } from "./use-editor-elements";
+import { EditorSection, useEditorElements } from "./use-editor-elements";
 
 export const sectionQuery = "section-query" as const;
-type TUseSectionQuery = [
-  EditorElement | null,
-  (slot: string, order: string[]) => void,
-];
+type TUseSectionQuery = {
+  data: EditorSection | null;
+};
 
 export function useSection(sectionId: string): TUseSectionQuery {
   const queryClient = useQueryClient();
   const { editor } = useEditorElements();
 
-  const section = editor.elements.find((element) => element.id === sectionId);
+  const section = editor.sections.get(sectionId);
 
   const { data } = useQuery(
     {
@@ -24,18 +23,5 @@ export function useSection(sectionId: string): TUseSectionQuery {
     queryClient,
   );
 
-  const setSectionSlotOrder = (slot: string, order: string[]) => {
-    if (!section) return;
-
-    console.log("setSectionSlotOrder", slot, order);
-    queryClient.setQueryData([sectionQuery], {
-      ...section,
-      slots: {
-        ...section.slots,
-        [slot]: order,
-      },
-    });
-  };
-
-  return [data, setSectionSlotOrder];
+  return { data };
 }

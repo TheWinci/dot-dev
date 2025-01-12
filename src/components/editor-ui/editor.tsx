@@ -16,8 +16,8 @@ export const Editor = () => {
     >
       <div
         className={cn("h-full w-full overflow-scroll", {
-          "w-[850px]": device === "Tablet",
-          "w-[420px]": device === "Smartphone",
+          "w-[850px]": device === "Tablet" && !isPreviewMode,
+          "w-[420px]": device === "Smartphone" && !isPreviewMode,
         })}
       >
         <RootContainer />
