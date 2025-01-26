@@ -1,5 +1,3 @@
-import { cn } from "@/lib/utils";
-import { Minus, Plus, SquareMinus, SquarePlus } from "lucide-react";
 import React from "react";
 
 export const LayerView = () => {

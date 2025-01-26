@@ -1,4 +1,9 @@
-import { useMutation, UseMutationResult, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useMutation,
+  UseMutationResult,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { v4 as uuid } from "uuid";
 
 export const editorSectionsQuery = "editor-sections" as const;
@@ -7,6 +12,7 @@ export type EditorSection = {
   id: string;
   name: string;
   props?: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any; // Prop name, Prop value
   };
   slots?: {
@@ -19,7 +25,7 @@ export type Editor = {
     id: string;
     content: string[];
   };
-  sections: Map<string, EditorSection>;
+  sections: { [key: string]: EditorSection };
   selectedSection?: string;
 };
 
@@ -39,112 +45,106 @@ const initialData: Editor = {
     content: [textOneUuid, columnsTwoUuid],
   },
   selectedSection: rootUuid,
-  sections: new Map([
-    [
-      textOneUuid,
-      {
-        id: textOneUuid,
-        name: "Text",
-        props: {
-          text: "Hello, World!",
-        },
-        slots: {},
+  sections: {
+    [rootUuid]: {
+      id: rootUuid,
+      name: "Root",
+      slots: {
+        content: [textOneUuid, columnsTwoUuid],
       },
-    ],
-    [
-      textTwoUuid,
-      {
-        id: textTwoUuid,
-        name: "Text",
-        props: {
-          text: "Middle, World!",
-        },
-        slots: {},
+    },
+    [textOneUuid]: {
+      id: textOneUuid,
+      name: "Text",
+      props: {
+        text: "Hello, World!",
       },
-    ],
-    [
-      textThreeUuid,
-      {
-        id: textThreeUuid,
-        name: "Text",
-        props: {
-          text: "Goodbye, World!",
-        },
-        slots: {},
+      slots: {},
+    },
+    [textTwoUuid]: {
+      id: textTwoUuid,
+      name: "Text",
+      props: {
+        text: "Middle, World!",
       },
-    ],
-    [
-      textOrder1,
-      {
-        id: textOrder1,
-        name: "Text",
-        props: {
-          text: "text 1",
-        },
-        slots: {},
+      slots: {},
+    },
+    [textThreeUuid]: {
+      id: textThreeUuid,
+      name: "Text",
+      props: {
+        text: "Goodbye, World!",
       },
-    ],
-    [
-      textOrder2,
-      {
-        id: textOrder2,
-        name: "Text",
-        props: {
-          text: "text 2",
-        },
-        slots: {},
+      slots: {},
+    },
+    [textOrder1]: {
+      id: textOrder1,
+      name: "Text",
+      props: {
+        text: "text 1",
       },
-    ],
-    [
-      textOrder3,
-      {
-        id: textOrder3,
-        name: "Text",
-        props: {
-          text: "text 3",
-        },
-        slots: {},
+      slots: {},
+    },
+    [textOrder2]: {
+      id: textOrder2,
+      name: "Text",
+      props: {
+        text: "text 2",
       },
-    ],
-    [
-      textOrder4,
-      {
-        id: textOrder4,
-        name: "Text",
-        props: {
-          text: "text 4",
-        },
-        slots: {},
+      slots: {},
+    },
+    [textOrder3]: {
+      id: textOrder3,
+      name: "Text",
+      props: {
+        text: "text 3",
       },
-    ],
-    [
-      columnsTwoUuid,
-      {
-        id: columnsTwoUuid,
-        name: "Columns",
-        props: {
-          numberOfColumns: 2,
-        },
-        slots: {
-          [0 as number]: [
-            textTwoUuid,
-            textOrder1,
-            textOrder2,
-            textOrder3,
-            textOrder4,
-          ],
-          [1 as number]: [textThreeUuid],
-        },
+      slots: {},
+    },
+    [textOrder4]: {
+      id: textOrder4,
+      name: "Text",
+      props: {
+        text: "text 4",
       },
-    ],
-  ]),
+      slots: {},
+    },
+    [columnsTwoUuid]: {
+      id: columnsTwoUuid,
+      name: "Columns",
+      props: {
+        numberOfColumns: 2,
+      },
+      slots: {
+        [0 as number]: [
+          textTwoUuid,
+          textOrder1,
+          textOrder2,
+          textOrder3,
+          textOrder4,
+        ],
+        [1 as number]: [textThreeUuid],
+      },
+    },
+  },
 };
 
 type TUseEditorElementsQuery = {
   editor: Editor;
   addToRoot: (elementToAdd: EditorSection) => void;
   setRootOrder: (newOrder: string[]) => void;
-  setSectionData: UseMutationResult<EditorSection | undefined, Error, EditorSection, unknown>;
+  setSectionData: UseMutationResult<
+    void,
+    Error,
+    EditorSection,
+    unknown
+  >;
+  setSectionsData: UseMutationResult<
+    void,
+    Error,
+    Editor["sections"],
+    unknown
+  >;
 };
 
 export function useEditorElements(): TUseEditorElementsQuery {
@@ -167,7 +167,7 @@ export function useEditorElements(): TUseEditorElementsQuery {
       root: {
         content: [...data.root.content, sectionToAdd.id],
       },
-      sections: [...data.sections, sectionToAdd],
+      sections: { ...data.sections, [sectionToAdd.id]: sectionToAdd },
     });
     queryClient.invalidateQueries({ queryKey: [editorSectionsQuery] });
   };
@@ -191,18 +191,29 @@ export function useEditorElements(): TUseEditorElementsQuery {
       if (!previousData) {
         return;
       }
-      const newSections = previousData.sections.set(
-        newSectionData.id,
-        newSectionData,
-      );
       queryClient.setQueryData([editorSectionsQuery], {
         ...previousData,
-        sections: newSections,
+        sections: {
+          ...previousData.sections,
+          [newSectionData.id]: newSectionData,
+        },
       });
-      return newSectionData;
     },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: [editorSectionsQuery] });
+  });
+
+  const setSectionsData = useMutation({
+    mutationKey: [editorSectionsQuery],
+    mutationFn: async (newSectionsData: Editor["sections"]) => {
+      const previousData = queryClient.getQueryData<Editor>([
+        editorSectionsQuery,
+      ]);
+      if (!previousData) {
+        return;
+      }
+      queryClient.setQueryData([editorSectionsQuery], {
+        ...previousData,
+        sections: newSectionsData,
+      });
     },
   });
 
@@ -211,5 +222,6 @@ export function useEditorElements(): TUseEditorElementsQuery {
     addToRoot,
     setRootOrder,
     setSectionData,
+    setSectionsData,
   };
 }

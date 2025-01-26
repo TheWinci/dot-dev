@@ -2,11 +2,12 @@ import { useEditorElements } from "@/hooks/use-editor-elements";
 import { usePreview } from "@/hooks/use-preview";
 import { useSection } from "@/hooks/use-section";
 import { cn } from "@/lib/utils";
-import React, { forwardRef, Fragment, useCallback, useState } from "react";
+import React from "react";
 import * as UI from "@/components/sections";
-import { ArrowDown, ArrowUp, Grip, Trash } from "lucide-react";
+import { ArrowDown, ArrowUp, Trash } from "lucide-react";
 import { Slot } from "./slot";
-import { set } from "date-fns";
+import { CSS } from "@dnd-kit/utilities";
+import { useSortable } from "@dnd-kit/sortable";
 
 type TSectionProps = {
   sectionId: string;
@@ -17,8 +18,24 @@ type TSectionProps = {
 export const Section = ({ sectionId, moveDown, moveUp }: TSectionProps) => {
   const [isPreviewMode] = usePreview();
   const { editor } = useEditorElements();
-  const { data: section } = useSection(sectionId);
-  const [isHovered, setIsHovered] = useState(false);
+  const {
+    data: section,
+    parentSectionId,
+    parentSlotName,
+  } = useSection(sectionId);
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({
+      id: sectionId,
+      data: {
+        parentSectionId,
+        parentSlotName,
+      },
+    });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
 
   if (!section) {
     return null;
@@ -40,28 +57,19 @@ export const Section = ({ sectionId, moveDown, moveUp }: TSectionProps) => {
     {} as Record<string, React.ReactNode[]>,
   );
 
-  const handleMouseOver = (event: React.MouseEvent) => {
-    event.preventDefault();
-    setIsHovered(true);
-  };
-
-  const handleMouseOut = (event: React.MouseEvent) => {
-    event.preventDefault();
-    setIsHovered(false);
-  };
-
   return (
     <div
-      className="flex flex-col"
-      onMouseOver={handleMouseOver}
-      onMouseOut={handleMouseOut}
+      className={`flex flex-col`}
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
     >
       <div
         className={cn(
-          "peer right-0 z-40 flex w-fit items-center bg-slate-600 p-1 text-sm leading-none opacity-45",
+          `right-0 z-40 flex w-fit items-center bg-slate-600 p-1 text-sm leading-none opacity-45`,
           {
             hidden: isPreviewMode,
-            "opacity-100": isHovered,
           },
         )}
       >
@@ -82,10 +90,10 @@ export const Section = ({ sectionId, moveDown, moveUp }: TSectionProps) => {
       </div>
       <section
         key={`section-${sectionId}`}
-        className={cn("peer relative", {
-          "rounded border border-dashed border-slate-600 p-4 hover:border-slate-500 peer-hover:border-slate-500":
-            !isPreviewMode,
-          "rounded border border-dashed border-green-600 p-4 hover:border-green-500 peer-hover:border-green-500":
+        className={cn(`relative`, {
+          "rounded border-2 border-dashed p-4": !isPreviewMode,
+          "border-slate-600": !isPreviewMode,
+          "border-green-600":
             !isPreviewMode && sectionId === editor.selectedSection,
         })}
       >

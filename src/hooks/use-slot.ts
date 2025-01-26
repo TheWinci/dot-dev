@@ -1,17 +1,17 @@
 import { moveElementDown, moveElementUp } from "@/lib/utils";
 import { useEditorElements } from "./use-editor-elements";
-import { useEffect } from "react";
 
 type TUseSlot = {
   sections: string[] | null;
   moveUp: (sectionId: string) => void;
   moveDown: (sectionId: string) => void;
+  setSectionsOrder: (newOrder: string[]) => void;
 };
 
 export function useSlot(sectionId: string, slotName: string): TUseSlot {
   const { editor, setSectionData } = useEditorElements();
 
-  const section = editor.sections.get(sectionId);
+  const section = editor.sections?.[sectionId];
   const slot = section?.slots?.[slotName];
 
   const moveUp = (sectionId: string) => {
@@ -34,5 +34,13 @@ export function useSlot(sectionId: string, slotName: string): TUseSlot {
     setSectionData.mutate(section);
   };
 
-  return { sections: slot || null, moveUp, moveDown };
+  const setSectionsOrder = (newOrder: string[]) => {
+    if (!slot || !section || !section.slots) {
+      return;
+    }
+    section.slots[slotName] = newOrder;
+    setSectionData.mutate(section);
+  };
+
+  return { sections: slot || null, moveUp, moveDown, setSectionsOrder };
 }

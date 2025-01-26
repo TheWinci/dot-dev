@@ -1,4 +1,4 @@
-import React, { useMemo, useState, ComponentProps } from "react";
+import React, { useMemo, useState } from "react";
 import * as UI from "@/components/sections";
 import { Search } from "lucide-react";
 import {
@@ -7,9 +7,11 @@ import {
   SidebarInput,
 } from "@/components/ui/sidebar";
 import { Label } from "@/components/ui/label";
+// import { useDraggable } from "@/hooks/use-draggable";
 
 export const ComponentsList = () => {
   const [searchPhrase, setSearchPhrase] = useState<string | null>(null);
+  // const { startDrag } = useDraggable();
 
   const keys = useMemo(
     () =>
@@ -70,6 +72,7 @@ export const ComponentsList = () => {
             draggable
             onDragStart={(e) => {
               e.dataTransfer.setData("component", key);
+              // startDrag(key);
             }}
             key={key}
             className="flex items-center gap-2 rounded-md p-2 hover:bg-gray-800"
