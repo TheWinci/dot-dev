@@ -4,7 +4,7 @@ import { useSection } from "@/hooks/use-section";
 import { cn } from "@/lib/utils";
 import React from "react";
 import * as UI from "@/components/sections";
-import { ArrowDown, ArrowUp, Trash } from "lucide-react";
+import { Trash } from "lucide-react";
 import { Slot } from "./slot";
 import { CSS } from "@dnd-kit/utilities";
 import { useSortable } from "@dnd-kit/sortable";
@@ -15,7 +15,7 @@ type TSectionProps = {
   moveDown?: () => void;
 };
 
-export const Section = ({ sectionId, moveDown, moveUp }: TSectionProps) => {
+export const Section = ({ sectionId }: TSectionProps) => {
   const [isPreviewMode] = usePreview();
   const { editor } = useEditorElements();
   const {
@@ -60,31 +60,21 @@ export const Section = ({ sectionId, moveDown, moveUp }: TSectionProps) => {
   return (
     <div
       className={`flex flex-col`}
-      ref={setNodeRef}
       style={style}
+      ref={setNodeRef}
       {...attributes}
       {...listeners}
     >
       <div
         className={cn(
-          `right-0 z-40 flex w-fit items-center bg-slate-600 p-1 text-sm leading-none opacity-45`,
+          `right-0 z-40 mx-1 flex items-center justify-between bg-slate-600 p-1.5 text-sm leading-none opacity-45`,
           {
             hidden: isPreviewMode,
           },
         )}
       >
-        <span className="ml-2">Section: {section.name}</span>
-        <div className="ml-2 cursor-pointer" title="Move up" onClick={moveUp}>
-          <ArrowUp size={14} />
-        </div>
-        <div
-          className="ml-2 cursor-pointer"
-          title="Move down"
-          onClick={moveDown}
-        >
-          <ArrowDown size={14} />
-        </div>
-        <div className="ml-2 cursor-pointer" title="Delete">
+        <span className="mx-1">Section: {section.name}</span>
+        <div className="mx-1 cursor-pointer" title="Delete">
           <Trash size={14} />
         </div>
       </div>

@@ -11,6 +11,7 @@ export default {
     extend: {
       backgroundImage: {
         "gradient-to-r": "linear-gradient(to right, var(--tw-gradient-stops))",
+        "stripped": "repeating-linear-gradient(45deg, var(--tw-gradient-stops))", //#606dbc, #606dbc 10px, #465298 10px, #465298 20px)",
       },
       colors: {
         background: "hsl(var(--background))",

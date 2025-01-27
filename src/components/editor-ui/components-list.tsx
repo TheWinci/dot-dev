@@ -65,8 +65,6 @@ export const ComponentsList = () => {
         const Component = UI[key];
         const slots = Component?.slots;
 
-        console.log(key, 'slots', slots)
-
         return (
           <div
             draggable

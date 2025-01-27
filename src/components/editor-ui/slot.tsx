@@ -1,11 +1,9 @@
 import { usePreview } from "@/hooks/use-preview";
 import { useSlot } from "@/hooks/use-slot";
 import { cn } from "@/lib/utils";
-import React, {  } from "react";
+import React from "react";
 import { Section } from "./section";
-import {
-  useDroppable,
-} from "@dnd-kit/core";
+import { useDroppable } from "@dnd-kit/core";
 import { SortableContext } from "@dnd-kit/sortable";
 
 export type TSlotProps = {
@@ -15,10 +13,7 @@ export type TSlotProps = {
 
 export const Slot = ({ sectionId, slot }: TSlotProps) => {
   const [isPreviewMode] = usePreview();
-  const { sections, moveUp, moveDown } = useSlot(
-    sectionId,
-    slot,
-  );
+  const { sections, moveUp, moveDown } = useSlot(sectionId, slot);
 
   const { setNodeRef } = useDroppable({
     id: `${sectionId}-${slot}`,
@@ -42,13 +37,13 @@ export const Slot = ({ sectionId, slot }: TSlotProps) => {
         <div
           key={`section-${sectionId}-slot-${slot}-label`}
           className={cn(
-            "right-0 z-40 flex w-fit items-center bg-slate-600 p-[2px] text-sm leading-none opacity-50 hover:opacity-100",
+            "bg-stripped right-0 z-40 mx-1 mt-0.5 flex items-center from-slate-700 from-[length:0px_10px] to-slate-600 to-[length:10px_20px] p-1.5 text-sm leading-none opacity-50 hover:opacity-100",
             {
               hidden: isPreviewMode,
             },
           )}
         >
-          <span className="m-1">Slot: {slot}</span>
+          <span className="mx-1">Slot: {slot}</span>
         </div>
         <div
           ref={setNodeRef}
