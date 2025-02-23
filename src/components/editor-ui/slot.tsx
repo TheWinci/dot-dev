@@ -37,7 +37,7 @@ export const Slot = ({ sectionId, slot }: TSlotProps) => {
         <div
           key={`section-${sectionId}-slot-${slot}-label`}
           className={cn(
-            "bg-stripped right-0 z-40 mx-1 mt-0.5 flex items-center from-slate-700 from-[length:0px_10px] to-slate-600 to-[length:10px_20px] p-1.5 text-sm leading-none opacity-50 hover:opacity-100",
+            "bg-stripped-test right-0 z-40 mx-1 mt-0.5 flex items-center from-slate-700 from-[length:0px_10px] to-slate-600 to-[length:10px_20px] p-1.5 text-sm leading-none opacity-50 hover:opacity-100",
             {
               hidden: isPreviewMode,
             },

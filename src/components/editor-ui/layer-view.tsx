@@ -23,7 +23,7 @@ export const LayerView = () => {
           {/* 1st Level Accordion Heading */}
           <div className="hs-accordion-heading flex w-full items-center gap-x-0.5 py-0.5">
             <button
-              className="hs-accordion-toggle flex size-6 items-center justify-center rounded-md hover:bg-gray-100 focus:bg-gray-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+              className="hs-accordion-toggle flex size-6 items-center justify-center rounded-md hover:bg-gray-100 focus:bg-gray-100 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50"
               aria-expanded="true"
               aria-controls="hs-customize-tree-collapse-one"
             >
@@ -88,7 +88,7 @@ export const LayerView = () => {
                 {/* 2nd Level Accordion Heading */}
                 <div className="hs-accordion-heading flex w-full items-center gap-x-0.5 py-0.5">
                   <button
-                    className="hs-accordion-toggle flex size-6 items-center justify-center rounded-md hover:bg-gray-100 focus:bg-gray-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                    className="hs-accordion-toggle flex size-6 items-center justify-center rounded-md hover:bg-gray-100 focus:bg-gray-100 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50"
                     aria-expanded="true"
                     aria-controls="hs-customize-tree-sub-collapse-one"
                   >
@@ -137,7 +137,7 @@ export const LayerView = () => {
                       {/* 3rd Level Accordion Heading */}
                       <div className="hs-accordion-heading flex w-full items-center gap-x-0.5 py-0.5">
                         <button
-                          className="hs-accordion-toggle flex size-6 items-center justify-center rounded-md hover:bg-gray-100 focus:bg-gray-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                          className="hs-accordion-toggle flex size-6 items-center justify-center rounded-md hover:bg-gray-100 focus:bg-gray-100 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50"
                           aria-expanded="true"
                           aria-controls="hs-customize-tree-sub-level-two-collapse-one"
                         >
@@ -366,7 +366,7 @@ export const LayerView = () => {
                 {/* 2nd Level Accordion Heading */}
                 <div className="hs-accordion-heading flex w-full items-center gap-x-0.5 py-0.5">
                   <button
-                    className="hs-accordion-toggle flex size-6 items-center justify-center rounded-md hover:bg-gray-100 focus:bg-gray-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                    className="hs-accordion-toggle flex size-6 items-center justify-center rounded-md hover:bg-gray-100 focus:bg-gray-100 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50"
                     aria-expanded="false"
                     aria-controls="hs-customize-tree-sub-collapse-two"
                   >
@@ -501,7 +501,7 @@ export const LayerView = () => {
                 {/* 2nd Level Accordion Heading */}
                 <div className="hs-accordion-heading flex w-full items-center gap-x-0.5 py-0.5">
                   <button
-                    className="hs-accordion-toggle flex size-6 items-center justify-center rounded-md hover:bg-gray-100 focus:bg-gray-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                    className="hs-accordion-toggle flex size-6 items-center justify-center rounded-md hover:bg-gray-100 focus:bg-gray-100 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50"
                     aria-expanded="false"
                     aria-controls="hs-customize-tree-sub-collapse-three"
                   >
@@ -644,7 +644,7 @@ export const LayerView = () => {
           {/* 1st Level Accordion Heading */}
           <div className="hs-accordion-heading flex w-full items-center gap-x-0.5 py-0.5">
             <button
-              className="hs-accordion-toggle flex size-6 items-center justify-center rounded-md hover:bg-gray-100 focus:bg-gray-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+              className="hs-accordion-toggle flex size-6 items-center justify-center rounded-md hover:bg-gray-100 focus:bg-gray-100 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50"
               aria-expanded="false"
               aria-controls="hs-customize-tree-collapse-two"
             >
@@ -818,7 +818,7 @@ export const LayerView = () => {
           {/* 1st Level Accordion Heading */}
           <div className="hs-accordion-heading flex w-full items-center gap-x-0.5 py-0.5">
             <button
-              className="hs-accordion-toggle flex size-6 items-center justify-center rounded-md hover:bg-gray-100 focus:bg-gray-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+              className="hs-accordion-toggle flex size-6 items-center justify-center rounded-md hover:bg-gray-100 focus:bg-gray-100 focus:outline-hidden disabled:pointer-events-none disabled:opacity-50"
               aria-expanded="false"
               aria-controls="hs-customize-tree-collapse-three"
             >

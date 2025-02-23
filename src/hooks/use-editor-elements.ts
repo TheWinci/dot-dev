@@ -26,7 +26,7 @@ export type Editor = {
     content: string[];
   };
   sections: { [key: string]: EditorSection };
-  selectedSection?: string;
+  selectedSection: string;
 };
 
 const rootUuid = uuid();
@@ -38,19 +38,20 @@ const textOrder1 = uuid();
 const textOrder2 = uuid();
 const textOrder3 = uuid();
 const textOrder4 = uuid();
+const editableMDXUuid = uuid();
 
 const initialData: Editor = {
   root: {
     id: rootUuid,
     content: [textOneUuid, columnsTwoUuid],
   },
-  selectedSection: rootUuid,
+  selectedSection: editableMDXUuid,
   sections: {
     [rootUuid]: {
       id: rootUuid,
       name: "Root",
       slots: {
-        content: [textOneUuid, columnsTwoUuid],
+        content: [textOneUuid, columnsTwoUuid, editableMDXUuid],
       },
     },
     [textOneUuid]: {
@@ -120,10 +121,23 @@ const initialData: Editor = {
           textTwoUuid,
           textOrder1,
           textOrder2,
-          textOrder3,
-          textOrder4,
         ],
         [1 as number]: [textThreeUuid],
+      },
+    },
+    [editableMDXUuid]: {
+      id: editableMDXUuid,
+      name: "EditableMDX",
+      slots: {},
+      props: {
+        source: `
+Some **next-mdx-remote** text,
+
+# with a componentD:
+
+<Test />
+<Editable />
+        `,
       },
     },
   },

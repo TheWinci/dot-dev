@@ -56,7 +56,7 @@ export const Navigation = () => {
       <header
         className={cn(
           "sticky top-0 flex h-16 shrink-0 items-center justify-between gap-2 border-b bg-background px-4 transition-all",
-          { "!h-0 !overflow-hidden !p-0": isPreviewMode },
+          { "h-0! overflow-hidden! p-0!": isPreviewMode },
         )}
       >
         <aside className="flex items-center gap-2">

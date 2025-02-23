@@ -8,11 +8,12 @@ import {
 } from "@/components/ui/sheet";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { usePreview } from "@/hooks/use-preview";
-import { Plus, SquareStackIcon } from "lucide-react";
+import { Plus, SquareStackIcon, TableProperties } from "lucide-react";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { ComponentsList } from "./components-list";
 import { LayerView } from "./layer-view";
+import { ComponentProps } from "./component-props";
 
 export const Sidebar = () => {
   const [isPreviewMode] = usePreview();
@@ -24,7 +25,7 @@ export const Sidebar = () => {
           hideX
           side="right"
           className={cn(
-            "z-[80] mt-16 w-16 overflow-hidden p-0 shadow-none transition-all focus:border-none",
+            "z-80 mt-16 w-16 overflow-hidden p-0 shadow-none transition-all focus:border-none",
             { hidden: isPreviewMode },
           )}
         >
@@ -41,13 +42,19 @@ export const Sidebar = () => {
             >
               <SquareStackIcon />
             </TabsTrigger>
+            <TabsTrigger
+              value="Properties"
+              className="h-10 w-10 p-0 data-[state=active]:bg-muted"
+            >
+              <TableProperties />
+            </TabsTrigger>
           </TabsList>
         </SheetContent>
         <SheetContent
           hideX
           side="right"
           className={cn(
-            "z-[40] mr-16 mt-16 h-full w-80 overflow-hidden bg-background p-0 shadow-none transition-all",
+            "z-40 mr-16 mt-16 h-full w-80 overflow-hidden bg-background p-0 shadow-none transition-all",
             { hidden: isPreviewMode },
           )}
         >
@@ -69,6 +76,15 @@ export const Sidebar = () => {
                 </SheetDescription>
               </SheetHeader>
               <LayerView />
+            </TabsContent>
+            <TabsContent value="Properties">
+              <SheetHeader className="text-left">
+                <SheetTitle>Properties</SheetTitle>
+                <SheetDescription>
+                  You can see and edit properties of the selected component
+                </SheetDescription>
+              </SheetHeader>
+              <ComponentProps />
             </TabsContent>
           </div>
         </SheetContent>

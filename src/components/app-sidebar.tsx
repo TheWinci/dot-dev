@@ -31,6 +31,10 @@ const data = {
           title: "Visual Builder",
           url: "/visual-builder",
         },
+        {
+          title: "Editable MarkDown",
+          url: "/mdx-editor",
+        },
       ],
     },
   ],
@@ -40,7 +44,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-        <span className="animate-gradient bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text p-1 text-center text-2xl font-bold text-transparent">
+        <span className="animate-gradient bg-linear-to-r from-blue-500 to-purple-500 bg-clip-text p-1 text-center text-2xl font-bold text-transparent">
           WINCI.DEV
         </span>
       </SidebarHeader>

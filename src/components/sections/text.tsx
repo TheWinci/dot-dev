@@ -10,3 +10,4 @@ export const Text = ({ text }: TTextProps) => {
 };
 
 Text.slots = [] as string[];
+Text.props = [] as string[];

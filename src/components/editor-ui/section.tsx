@@ -18,8 +18,8 @@ type TSectionProps = {
 export const Section = ({ sectionId }: TSectionProps) => {
   const [isPreviewMode] = usePreview();
   const { editor } = useEditorElements();
+  const section = editor.sections[sectionId];
   const {
-    data: section,
     parentSectionId,
     parentSlotName,
   } = useSection(sectionId);

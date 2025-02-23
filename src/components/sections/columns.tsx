@@ -19,3 +19,4 @@ export const Columns = ({ numberOfColumns = 1, slots = {} }: TColumnsProps) => {
 };
 
 Columns.slots = Array.from({ length: 10 }).map((_, index) => index.toString());
+Columns.props = [] as string[];
