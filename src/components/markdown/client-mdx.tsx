@@ -10,7 +10,7 @@ export type TClientMDXProps = {
 };
 // export type TClientMDXProps = { source: MDXRemoteSerializeResult<Record<string, unknown>, Record<string, unknown>> };
 
-const Test = () => <div>TEST from serialized React component</div>;
+const Test = ({startWith = ''}: {startWith?: string}) => <div>[{startWith}] serialized React component from TSX</div>;
 
 function CustomH1({ children }: { children: React.ReactNode }) {
   return <h1 style={{ color: "blue", fontSize: "100px" }}>{children}</h1>;

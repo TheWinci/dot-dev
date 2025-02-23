@@ -51,7 +51,7 @@ const initialData: Editor = {
       id: rootUuid,
       name: "Root",
       slots: {
-        content: [textOneUuid, columnsTwoUuid, editableMDXUuid],
+        content: [textOneUuid, editableMDXUuid, columnsTwoUuid],
       },
     },
     [textOneUuid]: {
@@ -117,11 +117,7 @@ const initialData: Editor = {
         numberOfColumns: 2,
       },
       slots: {
-        [0 as number]: [
-          textTwoUuid,
-          textOrder1,
-          textOrder2,
-        ],
+        [0 as number]: [textTwoUuid, textOrder1, textOrder2],
         [1 as number]: [textThreeUuid],
       },
     },
@@ -135,7 +131,7 @@ Some **next-mdx-remote** text,
 
 # with a componentD:
 
-<Test />
+<Test startWith="example prop"/>
 <Editable />
         `,
       },
@@ -147,18 +143,8 @@ type TUseEditorElementsQuery = {
   editor: Editor;
   addToRoot: (elementToAdd: EditorSection) => void;
   setRootOrder: (newOrder: string[]) => void;
-  setSectionData: UseMutationResult<
-    void,
-    Error,
-    EditorSection,
-    unknown
-  >;
-  setSectionsData: UseMutationResult<
-    void,
-    Error,
-    Editor["sections"],
-    unknown
-  >;
+  setSectionData: UseMutationResult<void, Error, EditorSection, unknown>;
+  setSectionsData: UseMutationResult<void, Error, Editor["sections"], unknown>;
 };
 
 export function useEditorElements(): TUseEditorElementsQuery {
