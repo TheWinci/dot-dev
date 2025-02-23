@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { ClientMDX } from "../markdown/client-mdx";
 import { serialize } from "next-mdx-remote/serialize";
+import remarkGfm from "remark-gfm";
+import remarkBreaks from 'remark-breaks';
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 
 export type TEditableMDXProps = { source?: string };
@@ -15,7 +17,11 @@ export const EditableMDX = ({ source = "" }: TEditableMDXProps) => {
 
   useEffect(() => {
     console.log("source changed", source);
-    serialize(source).then((result) => {
+    serialize(source, {
+      mdxOptions: {
+        remarkPlugins: [remarkGfm, remarkBreaks],
+      },
+    }).then((result) => {
       setSerializedSource(result);
     });
   }, [source]);

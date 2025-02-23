@@ -24,11 +24,10 @@ export const ComponentProps = () => {
       <div>ComponentProps</div>
       {props}
       <textarea
-        className="h-100 w-full border-2 border-solid border-neutral-600"
+        className="h-100 w-full border-2 border-solid border-neutral-600 whitespace-pre-wrap"
         onChange={handleOnChange}
         defaultValue={selectedSection.props?.source}
-      >
-      </textarea>
+      ></textarea>
     </Fragment>
   );
 };

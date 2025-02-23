@@ -22,5 +22,9 @@ const overrideComponents = {
   h1: CustomH1,
 };
 export const ClientMDX = ({ source }: TClientMDXProps) => {
-  return <MDXRemote {...source} components={overrideComponents} />;
+  return (
+    <div className="prose prose-gray max-w-none">
+      <MDXRemote {...source} components={overrideComponents} />
+    </div>
+  );
 };

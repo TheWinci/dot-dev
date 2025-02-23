@@ -127,13 +127,22 @@ const initialData: Editor = {
       slots: {},
       props: {
         source: `
+
 Some **next-mdx-remote** text,
 
-# with a componentD:
+# MD from string
 
 <Test startWith="example prop"/>
 <Editable />
-        `,
+
+- [ ] Task list
+- [x] Completed task
+~~Cross this out~~  
+
+| Header 1 | Header 2 |  
+|----------|----------|  
+| Row 1    | Data     |  
+`,
       },
     },
   },
