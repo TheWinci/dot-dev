@@ -20,7 +20,7 @@ export const Sidebar = () => {
 
   return (
     <Sheet open={true} modal={false}>
-      <Tabs className="w-full" defaultValue="Components">
+      <Tabs className="w-full" defaultValue="Properties">
         <SheetContent
           hideX
           side="right"
