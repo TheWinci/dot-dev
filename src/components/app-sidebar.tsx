@@ -18,6 +18,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import Link from "next/link";
 
 // This is sample data.
 const data = {
@@ -31,10 +32,6 @@ const data = {
           title: "Visual Builder",
           url: "/visual-builder",
         },
-        {
-          title: "Editable MarkDown",
-          url: "/mdx-editor",
-        },
       ],
     },
   ],
@@ -44,9 +41,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-        <span className="animate-gradient bg-linear-to-r from-blue-500 to-purple-500 bg-clip-text p-1 text-center text-2xl font-bold text-transparent">
-          WINCI.DEV
-        </span>
+        <Link
+          href="/"
+          className="text-sidebar-foreground block p-4 text-center text-2xl font-bold"
+        >
+          <span className="animate-gradient bg-linear-to-r from-blue-500 to-purple-500 bg-clip-text p-1 text-center text-2xl font-bold text-transparent">
+            WINCI.DEV
+          </span>
+        </Link>
       </SidebarHeader>
       <SidebarContent className="gap-0">
         {/* We create a collapsible SidebarGroup for each parent. */}
@@ -60,7 +62,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarGroup>
               <SidebarGroupLabel
                 asChild
-                className="group/label text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                className="group/label text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sm"
               >
                 <CollapsibleTrigger>
                   {item.title}{" "}
