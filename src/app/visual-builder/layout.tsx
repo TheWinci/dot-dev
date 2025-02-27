@@ -5,7 +5,7 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { Navigation } from "../../components/editor-ui/navigation";
 import { Sidebar } from "../../components/editor-ui/sidebar";
 
-export const Layout: FC<PropsWithChildren> = ({ children }) => {
+const Layout: FC<PropsWithChildren> = ({ children }) => {
   const queryClient = getQueryClient();
 
   return (
