@@ -11,9 +11,9 @@ export type TClientMDXProps = {
 // export type TClientMDXProps = { source: MDXRemoteSerializeResult<Record<string, unknown>, Record<string, unknown>> };
 
 const Test = ({ startWith = "" }: { startWith?: string }) => (
-  <div className="text-2xl font-black text-green-500">
+  <span className="text-2xl font-black text-green-500">
     [{startWith}] serialized React component from TSX
-  </div>
+  </span>
 );
 
 function CustomH1({ children }: { children: React.ReactNode }) {

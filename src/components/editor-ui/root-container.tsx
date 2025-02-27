@@ -26,53 +26,9 @@ function RootContainer() {
 
   const sensors = useSensors(mouseSensor, touchSensor, keyboardSensor);
 
-  // const handleDragEnd = (event: DragEndEvent) => {
-  //   const { active, over } = event;
-  //   console.log("handleDragEnd", active, over);
-
-  //   if (!editor.sections) {
-  //     console.log("editor.sections not found");
-  //     return;
-  //   }
-  //   const activeSection = editor.sections[active.data.current?.parentSectionId];
-  //   const activeSlot =
-  //     editor.sections[active.data.current?.parentSectionId]?.slots?.[
-  //       active.data.current?.parentSlotName
-  //     ];
-  //   const overSection = editor.sections[over?.data.current?.parentSectionId];
-  //   const overSlot =
-  //     editor.sections[over?.data.current?.parentSectionId]?.slots?.[
-  //       over?.data.current?.parentSlotName
-  //     ];
-
-  //   if (!activeSection || !overSection || !activeSlot || !overSlot) {
-  //     console.log("activeSection or overSection not found");
-  //     return;
-  //   }
-
-  //   const activeIndex = activeSlot.indexOf(event.active.id as string);
-  //   const overIndex = overSlot.indexOf(event.over?.id as string);
-
-  //   if (activeIndex === -1 || overIndex === -1) {
-  //     console.log("activeIndex or overIndex not found");
-  //     return;
-  //   }
-  //   const newOrder = arrayMove(activeSlot, activeIndex, overIndex);
-  //   console.log("oldOrder", activeSlot);
-  //   console.log("newOrder", newOrder);
-  //   setSectionData.mutate({
-  //     ...activeSection,
-  //     slots: {
-  //       ...activeSection.slots,
-  //       [active.data.current?.parentSlotName]: newOrder,
-  //     },
-  //   });
-  // };
-
   const handleDragOver = useCallback(
     (event: DragOverEvent) => {
       const { active, over } = event;
-      // console.log("handleDragOver", active, over);
 
       if (!editor.sections) {
         console.log("editor.sections not found");
@@ -177,11 +133,10 @@ function RootContainer() {
   return (
     <DndContext
       sensors={sensors}
-      // onDragEnd={handleDragOver}
       onDragOver={handleDragOver}
     >
       <div
-        className={cn("h-full w-full", {
+        className={cn("h-full w-full overflow-auto flex-1", {
           "rounded border border-dashed border-orange-600 p-2": !isPreviewMode,
           "rounded border-2 border-dashed border-blue-600 p-2":
             !isPreviewMode && editor.selectedSection === editor.root.id,

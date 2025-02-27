@@ -10,12 +10,12 @@ export const Editor = () => {
 
   return (
     <div
-      className={cn("flex flex-1 flex-col items-center overflow-scroll", {
+      className={cn("flex h-full flex-1 flex-col items-center overflow-hidden", {
         "mr-[385px]": !isPreviewMode,
       })}
     >
       <div
-        className={cn("h-full w-full overflow-scroll", {
+        className={cn("h-full w-full overflow-y-auto max-h-full", {
           "w-[850px]": device === "Tablet" && !isPreviewMode,
           "w-[420px]": device === "Smartphone" && !isPreviewMode,
         })}
