@@ -16,7 +16,6 @@ export const EditableMDX = ({ source = "" }: TEditableMDXProps) => {
   const [serializedSource, setSerializedSource] = useState<TSerializedSource>();
 
   useEffect(() => {
-    console.log("source changed", source);
     serialize(source, {
       mdxOptions: {
         remarkPlugins: [remarkGfm, remarkBreaks],

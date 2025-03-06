@@ -16,6 +16,27 @@ const Test = ({ startWith = "" }: { startWith?: string }) => (
   </span>
 );
 
+const CustomDiv = ({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  const [key, setKey] = React.useState(0);
+
+  React.useEffect(() => {
+    setKey((prev) => prev + 1);
+    return () => setKey(0);
+  }, [className]);
+
+  return (
+    <div key={`custom-div-${key}`} className={className}>
+      {children}
+    </div>
+  );
+};
+
 function CustomH1({ children }: { children: React.ReactNode }) {
   return <h1 style={{ color: "blue", fontSize: "100px" }}>{children}</h1>;
 }
@@ -23,6 +44,7 @@ function CustomH1({ children }: { children: React.ReactNode }) {
 const overrideComponents = {
   Test,
   Editable,
+  CustomDiv,
   h1: CustomH1,
 };
 export const ClientMDX = ({ source }: TClientMDXProps) => {

@@ -32,6 +32,10 @@ const data = {
           title: "Visual Builder",
           url: "/visual-builder",
         },
+        {
+          title: "MDX Editor",
+          url: "/mdx-editor",
+        },
       ],
     },
   ],
