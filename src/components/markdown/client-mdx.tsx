@@ -31,7 +31,11 @@ const CustomDiv = ({
   }, [className]);
 
   return (
-    <div key={`custom-div-${key}`} className={className}>
+    <div
+      key={`custom-div-${key}`}
+      className={className}
+      onClick={() => console.log("clicked")}
+    >
       {children}
     </div>
   );
@@ -49,7 +53,7 @@ const overrideComponents = {
 };
 export const ClientMDX = ({ source }: TClientMDXProps) => {
   return (
-    <div className="prose prose-gray max-w-none">
+    <div className="prose prose-gray w-full max-w-none">
       <MDXRemote {...source} components={overrideComponents} />
     </div>
   );

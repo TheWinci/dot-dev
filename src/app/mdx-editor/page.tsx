@@ -2,7 +2,6 @@
 import React from "react";
 import { EditableMDX } from "@/components/sections";
 import CodeMirror from "@uiw/react-codemirror";
-import { basicSetup } from 'codemirror';
 import { langs } from '@uiw/codemirror-extensions-langs';
 import { githubDark } from "@uiw/codemirror-theme-github";
 
@@ -55,7 +54,6 @@ const Page = () => {
           height="100%"
           theme={githubDark}
           extensions={[
-            basicSetup,
             langs.markdown(),
             langs.javascript(),
             langs.html(),
