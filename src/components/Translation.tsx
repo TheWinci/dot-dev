@@ -20,7 +20,7 @@ const Translation: React.FC<TranslationProps> = ({ translationKey }) => {
   }, dictionary);
 
   return (
-    <span className="bg-white text-4xl text-black">{String(translation)}</span>
+    <span className="bg-white text-4xl text-black">{String(translation || translationKey)}</span>
   );
 };
 
