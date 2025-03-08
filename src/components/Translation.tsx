@@ -15,14 +15,10 @@ const Translation: React.FC<TranslationProps> = ({ translationKey }) => {
   }
 
   const translation = translationKey.split(".").reduce((acc, key) => {
-    console.log('translationKey', translationKey)
-    console.log('acc', acc)
-    console.log('key', key)
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (acc as any)[key];
   }, dictionary);
 
-  console.log("returning translation", translation);
   return (
     <span className="bg-white text-4xl text-black">{String(translation)}</span>
   );

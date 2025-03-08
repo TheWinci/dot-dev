@@ -16,7 +16,7 @@ TEST
 <Script>
   console.log('Script injected successfully!');
 
-  </Script>
+</Script>
 
 <Translation translationKey="products.cart" />
 
