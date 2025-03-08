@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Editor } from "../../components/editor-ui/editor";
+import { Editor } from "../../../components/editor-ui/editor";
 
 const Page = () => {
   return (

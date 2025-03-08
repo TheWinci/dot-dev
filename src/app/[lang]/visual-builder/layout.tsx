@@ -2,8 +2,8 @@
 import React, { FC, PropsWithChildren } from "react";
 import { getQueryClient } from "@/providers/get-query-client";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
-import { Navigation } from "../../components/editor-ui/navigation";
-import { Sidebar } from "../../components/editor-ui/sidebar";
+import { Navigation } from "@/components/editor-ui/navigation";
+import { Sidebar } from "@/components/editor-ui/sidebar";
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
   const queryClient = getQueryClient();

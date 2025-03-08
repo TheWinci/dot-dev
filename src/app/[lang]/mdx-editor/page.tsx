@@ -13,9 +13,12 @@ TEST
 </CustomDiv>
 <Test startWith="TSX" />
 <Editable />
-<script>
-const test = 123;
-</script>
+<Script>
+  console.log('Script injected successfully!');
+
+  </Script>
+
+<Translation translationKey="products.cart" />
 
 \`\`\`jsx
 function Demo() {

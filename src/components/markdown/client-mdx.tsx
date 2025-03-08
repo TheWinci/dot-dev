@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import Editable from "@/markdown/editable.mdx";
+import Translation from "../Translation";
 
 export type TClientMDXProps = {
   source: MDXRemoteSerializeResult<
@@ -45,10 +46,46 @@ function CustomH1({ children }: { children: React.ReactNode }) {
   return <h1 style={{ color: "blue", fontSize: "100px" }}>{children}</h1>;
 }
 
+interface ScriptInjectorProps {
+  children: {
+    props: {
+      children: (string | unknown)[] | string;
+    };
+  };
+}
+
+const Script: React.FC<ScriptInjectorProps> = ({ children }) => {
+  useEffect(() => {
+    if (!children?.props?.children) return;
+
+    let text = "";
+    if (typeof children.props.children === "string") {
+      text = children.props.children;
+    } else {
+      text = children.props.children
+        .filter((child) => typeof child === "string")
+        .join("");
+    }
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+
+    script.text = text;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, [children]);
+
+  return null;
+};
+
 const overrideComponents = {
   Test,
   Editable,
   CustomDiv,
+  Script,
+  Translation,
   h1: CustomH1,
 };
 export const ClientMDX = ({ source }: TClientMDXProps) => {

@@ -1,5 +1,7 @@
+"use client"
 import * as React from "react";
 import { ChevronRight } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 import {
   Collapsible,
@@ -17,8 +19,11 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
+  SidebarFooter,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { LanguageSwitcher } from "./language-switcher";
+import { i18n, Locale } from "../../i18n-config";
 
 // This is sample data.
 const data = {
@@ -42,11 +47,14 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const pathname = usePathname();
+  const currentLang = pathname.split("/")[1] as Locale || i18n.defaultLocale;
+  
   return (
     <Sidebar {...props}>
       <SidebarHeader>
         <Link
-          href="/"
+          href={`/`}
           className="text-sidebar-foreground block p-4 text-center text-2xl font-bold"
         >
           <span className="animate-gradient bg-linear-to-r from-blue-500 to-purple-500 bg-clip-text p-1 text-center text-2xl font-bold text-transparent">
@@ -80,7 +88,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                       <SidebarMenuItem key={item.title}>
                         {/* @TODO implement isActive */}
                         <SidebarMenuButton asChild isActive={false}>
-                          <a href={item.url}>{item.title}</a>
+                          <a href={`/${currentLang}${item.url}`}>{item.title}</a>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                     ))}
@@ -91,6 +99,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </Collapsible>
         ))}
       </SidebarContent>
+      <SidebarFooter className="p-4 flex justify-end">
+        <LanguageSwitcher />
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );
